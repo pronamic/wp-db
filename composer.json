@@ -18,11 +18,7 @@
         }
     },
     "require": {
-        "php": ">=7.4",
-        "pronamic/wp-http": "^1.1",
-        "mpdf/mpdf": "^8.0",
-        "pronamic/wp-number": "^1.1",
-        "pronamic/wp-money": "^2.0"
+        "php": ">=7.4"
     },
     "require-dev": {
         "phpmd/phpmd": "^2.6",
