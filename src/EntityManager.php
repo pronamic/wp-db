@@ -71,7 +71,7 @@ class EntityManager {
 		$result = $this->wpdb->insert(
 			$entity->table,
 			$data,
-			$entity->get_format( $data )
+			$entity->get_data_format( $data )
 		);
 
 		if ( false === $result ) {
