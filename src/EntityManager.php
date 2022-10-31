@@ -59,7 +59,7 @@ class EntityManager {
 		return $id;
 	}
 
-	private function insert( $entity, $data ) {
+	public function insert( $entity, $data ) {
 		if ( null !== $entity->created_at_key ) {
 			$data[ $entity->created_at_key ] = \current_time( 'mysql', true );
 		}
@@ -83,7 +83,7 @@ class EntityManager {
 		return $id;
 	}
 
-	private function update( $entity, $data, $id ) {
+	public function update( $entity, $data, $id ) {
 		if ( null !== $entity->updated_at_key ) {
 			$data[ $entity->updated_at_key ] = \current_time( 'mysql', true );
 		}
