@@ -11,6 +11,10 @@ namespace Pronamic\WordPress\ORM;
  * Entity class
  */
 class Entity {
+    private $created_at_key = 'created_at';
+
+    private $updated_at_key = 'updated_at';
+
 	public function __construct( $table, $primary_key, $format ) {
 		$this->table       = $table;
 		$this->primary_key = $primary_key;
