@@ -41,7 +41,7 @@ class EntityManager {
 		$where_condition = [];
 
 		foreach ( $condition as $key => $value ) {
-			$where_condition[] = $key . ' = ' . $entity->format[ $key ];
+			$where_condition[] = $key . ' = ' . $entity->get_column_format( $key );
 		}
 
 		$query = $this->wpdb->prepare(
@@ -71,7 +71,7 @@ class EntityManager {
 		$result = $this->wpdb->insert(
 			$entity->table,
 			$data,
-			array_intersect_key( $entity->format, $data )
+			$entity->get_format( $data )
 		);
 
 		if ( false === $result ) {

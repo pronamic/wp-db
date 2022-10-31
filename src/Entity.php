@@ -15,12 +15,23 @@ class Entity {
 
     public $updated_at_key = 'updated_at';
 
-	public function __construct( $table, $primary_key, $format ) {
-		$this->table       = $table;
-		$this->primary_key = $primary_key;
-		$this->format      = $format;
+    public function __construct( $table, $primary_key, $format ) {
+        $this->table       = $table;
+        $this->primary_key = $primary_key;
+        $this->format      = $format;
+    }
 
-		$this->format['created_at'] = '%s';
-		$this->format['updated_at'] = '%s';
-	}
+    public function get_column_format( $column ) {
+        return \array_key_exists( $column, $this->format ) ? $this->format[ $column ] : '%s';
+    }
+
+    public function get_data_format( $data ) {
+        $format = [];
+
+        foreach ( $data as $column => $value ) {
+            $format[] = $this->get_column_format( $column );
+        }
+
+        return $format;
+    }
 }
