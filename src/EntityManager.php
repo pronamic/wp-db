@@ -60,8 +60,13 @@ class EntityManager {
 	}
 
 	private function insert( $entity, $data ) {
-		$data['created_at'] = \current_time( 'mysql', true );
-		$data['updated_at'] = \current_time( 'mysql', true );
+		if ( null !== $entity->created_at_key ) {
+			$data[ $entity->created_at_key ] = \current_time( 'mysql', true );
+		}
+
+		if ( null !== $entity->updated_at_key ) {
+			$data[ $entity->updated_at_key ] = \current_time( 'mysql', true );
+		}
 
 		$result = $this->wpdb->insert(
 			$entity->table,
@@ -79,7 +84,9 @@ class EntityManager {
 	}
 
 	private function update( $entity, $data, $id ) {
-		$data['updated_at'] = \current_time( 'mysql', true );
+		if ( null !== $entity->updated_at_key ) {
+			$data[ $entity->updated_at_key ] = \current_time( 'mysql', true );
+		}
 
 		$result = $this->wpdb->update(
 			$entity->table,
