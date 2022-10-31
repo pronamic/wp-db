@@ -29,3 +29,4 @@ $orm->register_entity(
 - https://www.baeldung.com/hibernate-entitymanager
 - https://yoast.com/developer-blog/yoast-seo-14-0-x/
 - https://github.com/Yoast/wordpress-seo/blob/88f4a39f6f285de342e2b9d9ed6c207a517b23d1/lib/orm.php
+- https://laravel-news.com/firstornew-firstorcreate-firstor-updateorcreate
