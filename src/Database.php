@@ -22,7 +22,11 @@ class Database {
 		$this->tables = [];
 	}
 
-	private function register_table( $name ) {
+	private function register_table( Table $table ) {
+		$name = $table->get_name();
+
+		$this->tables[ $name ] = $table;
+
 		$this->wpdb->$name = $this->wpdb->prefix . $name;
 	}
 }
