@@ -11,11 +11,11 @@ namespace Pronamic\WordPress\Database;
  * Column class
  */
 class Column {
-	private $name;
+	public $name;
 
-	private $definition;
+	public $definition;
 
-	private $format;
+	public $format;
 
 	public function __construct( $name, $definition, $format ) {
 		$this->name       = $name;

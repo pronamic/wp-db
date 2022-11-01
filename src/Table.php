@@ -13,9 +13,9 @@ namespace Pronamic\WordPress\Database;
 class Table {
 	private $name;
 
-	private $columns;
+	public $columns;
 
-	private $definition;
+	public $definition;
 
 	public $primary_key;
 
