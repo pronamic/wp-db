@@ -57,7 +57,7 @@ class Table {
 			$where_condition[] = $name . ' = ' . $this->get_column_format( $name );
 		}
 
-		return $this->wpdb->prepare(
+		return $this->database->prepare(
 			sprintf(
 				'SELECT %s FROM %s WHERE %s LIMIT 1;',
 				$select,

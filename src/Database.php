@@ -88,6 +88,10 @@ class Database {
 		return $row;
 	}
 
+	public function prepare( $query, $args ) {
+		return $this->wpdb->prepare( $query, $args );
+	}
+
 	/**
 	 * Update.
 	 * 
