@@ -28,7 +28,7 @@ class Table {
 		$this->definition = $definition;
 
 		foreach ( $columns as $column ) {
-			$this->columns[ $column->get_name() ] = $column;
+			$this->columns[ $column->name ] = $column;
 		}
 	}
 
