@@ -36,6 +36,10 @@ class Table {
 		return $this->name;
 	}
 
+	public function get_full_name() {
+		return $this->database->get_prefix() . $this->name;
+	}
+
 	private function get_column_format( $name ) {
 		return $this->columns[ $name ]->format;
 	}
@@ -61,7 +65,7 @@ class Table {
 			sprintf(
 				'SELECT %s FROM %s WHERE %s LIMIT 1;',
 				$select,
-				$this->name,
+				$this->get_full_name(),
 				implode( ' AND ', $where_condition )
 			),
 			$condition
@@ -86,7 +90,7 @@ class Table {
 		}
 
 		$this->database->update(
-			$this->name,
+			$this->get_full_name(),
 			$data,
 			[
 				$this->primary_key => $id,
@@ -106,7 +110,7 @@ class Table {
 		}
 
 		return $this->database->insert(
-			$this->name,
+			$this->get_full_name(),
 			$data,
 			$this->get_data_format( $data )
 		);

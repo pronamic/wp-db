@@ -42,10 +42,14 @@ class Database {
 		return $this->tables[ $name ];
 	}
 
+	public function get_prefix() {
+		return $this->wpdb->prefix;
+	}
+
 	private function install_table( $table ) {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		$full_table_name = $this->wpdb->prefix . $table->get_name();
+		$full_table_name = $table->get_full_name();
 
 		$charset_collate = '';
 
@@ -98,8 +102,6 @@ class Database {
 	 * @link https://developer.wordpress.org/reference/classes/wpdb/update/
 	 */
 	public function update( $table, $data, $where, $format = null, $where_format = null ) {
-		$table = $this->wpdb->prefix . $table;
-
 		$result = $this->wpdb->update( $table, $data, $where, $format, $where_format );
 
 		if ( false === $result ) {
@@ -115,8 +117,6 @@ class Database {
 	 * @link https://developer.wordpress.org/reference/classes/wpdb/insert/
 	 */
 	public function insert( $table, $data, $format = null ) {
-		$table = $this->wpdb->prefix . $table;
-
 		$result = $this->wpdb->insert( $table, $data, $format );
 
 		if ( false === $result ) {
