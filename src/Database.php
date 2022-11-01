@@ -25,6 +25,8 @@ class Database {
 	public function register_table( Table $table ) {
 		$name = $table->get_name();
 
+		$table->database = $this;
+
 		$this->tables[ $name ] = $table;
 
 		$this->wpdb->$name = $this->wpdb->prefix . $name;
@@ -34,6 +36,10 @@ class Database {
 		foreach ( $this->tables as $table ) {
 			$this->install_table( $table );
 		}
+	}
+
+	public function get_table( $name ) {
+		return $this->tables[ $name ];
 	}
 
 	private function install_table( $table ) {
@@ -68,5 +74,17 @@ class Database {
 		\dbDelta( $query );
 
 		\maybe_convert_table_to_utf8mb4( $full_table_name );
+	}
+
+	public function get_var( $query ) {
+		$var = $this->wpdb->get_var( $query );
+
+		return $var;
+	}
+
+	public function get_row( $query ) {
+		$row = $this->wpdb->get_row( $query );
+
+		return $row;
 	}
 }
