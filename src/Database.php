@@ -66,5 +66,7 @@ class Database {
 		$query = "CREATE TABLE $full_table_name ( $create_definition ) $table_options";
 
 		\dbDelta( $query );
+
+		\maybe_convert_table_to_utf8mb4( $full_table_name );
 	}
 }
