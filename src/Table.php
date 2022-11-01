@@ -19,9 +19,9 @@ class Table {
 
 	public $primary_key;
 
-    public $created_at_key = 'created_at';
+	public $created_at_key = 'created_at';
 
-    public $updated_at_key = 'updated_at';
+	public $updated_at_key = 'updated_at';
 
 	public function __construct( $name, $columns, $definition ) {
 		$this->name       = $name;
@@ -44,15 +44,15 @@ class Table {
 		return $this->columns[ $name ]->format;
 	}
 
-    public function get_data_format( $data ) {
-        $format = [];
+	public function get_data_format( $data ) {
+		$format = [];
 
-        foreach ( $data as $column => $value ) {
-            $format[] = $this->get_column_format( $column );
-        }
+		foreach ( $data as $column => $value ) {
+			$format[] = $this->get_column_format( $column );
+		}
 
-        return $format;
-    }
+		return $format;
+	}
 
 	private function first_query( $select, $condition ) {
 		$where_condition = [];
