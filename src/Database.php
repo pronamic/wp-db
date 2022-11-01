@@ -87,4 +87,40 @@ class Database {
 
 		return $row;
 	}
+
+	/**
+	 * Update.
+	 * 
+	 * @link https://developer.wordpress.org/reference/classes/wpdb/update/
+	 */
+	public function update( $table, $data, $where, $format = null, $where_format = null ) {
+		$table = $this->wpdb->prefix . $table;
+
+		$result = $this->wpdb->update( $table, $data, $where, $format, $where_format );
+
+		if ( false === $result ) {
+			throw new \Exception( \sprintf( 'Update error: %s', $this->wpdb->last_error ) );
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Insert.
+	 * 
+	 * @link https://developer.wordpress.org/reference/classes/wpdb/insert/
+	 */
+	public function insert( $table, $data, $format = null ) {
+		$table = $this->wpdb->prefix . $table;
+
+		$result = $this->wpdb->insert( $table, $data, $format );
+
+		if ( false === $result ) {
+			throw new \Exception( \sprintf( 'Insert error: %s, data: %s.', $this->wpdb->last_error, \wp_json_encode( $data, \JSON_PRETTY_PRINT ) ) );
+		}
+
+		$id = $this->wpdb->insert_id;
+
+		return $id;
+	}
 }

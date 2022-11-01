@@ -19,6 +19,10 @@ class Table {
 
 	public $primary_key;
 
+    public $created_at_key = 'created_at';
+
+    public $updated_at_key = 'updated_at';
+
 	public function __construct( $name, $columns, $definition ) {
 		$this->name       = $name;
 		$this->definition = $definition;
@@ -35,6 +39,16 @@ class Table {
 	private function get_column_format( $name ) {
 		return $this->columns[ $name ]->format;
 	}
+
+    public function get_data_format( $data ) {
+        $format = [];
+
+        foreach ( $data as $column => $value ) {
+            $format[] = $this->get_column_format( $column );
+        }
+
+        return $format;
+    }
 
 	private function first_query( $select, $condition ) {
 		$where_condition = [];
@@ -64,5 +78,37 @@ class Table {
 		$query = $this->first_query( '*', $condition );
 
 		return $this->database->get_row( $query );
+	}
+
+	public function update( $data, $id ) {
+		if ( null !== $this->updated_at_key ) {
+			$data[ $this->updated_at_key ] = \current_time( 'mysql', true );
+		}
+
+		$this->database->update(
+			$this->name,
+			$data,
+			[
+				$this->primary_key => $id,
+			],
+		);
+
+		return $id;
+	}
+
+	public function insert( $data ) {
+		if ( null !== $this->created_at_key ) {
+			$data[ $this->created_at_key ] = \current_time( 'mysql', true );
+		}
+
+		if ( null !== $this->updated_at_key ) {
+			$data[ $this->updated_at_key ] = \current_time( 'mysql', true );
+		}
+
+		return $this->database->insert(
+			$this->name,
+			$data,
+			$this->get_data_format( $data )
+		);
 	}
 }
