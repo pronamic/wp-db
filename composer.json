@@ -1,6 +1,6 @@
 {
-    "name": "pronamic/wp-orm",
-    "description": "Object–relational mapping library for WordPress.",
+    "name": "pronamic/wp-db",
+    "description": "Database library for WordPress.",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Pronamic\\WordPress\\ORM\\": "src/"}
+        "psr-4": {"Pronamic\\WordPress\\Database\\": "src/"}
     },
     "config": {
         "allow-plugins": {

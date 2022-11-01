@@ -2,10 +2,10 @@
 /**
  * Entity
  *
- * @package Pronamic/WordPress/ORM
+ * @package Pronamic/WordPress/Database
  */
 
-namespace Pronamic\WordPress\ORM;
+namespace Pronamic\WordPress\Database;
 
 /**
  * Entity class
