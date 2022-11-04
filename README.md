@@ -39,6 +39,30 @@ $database->register_table( $payments_table );
 $database->install();
 ```
 
+```php
+<?php
+
+$payments_table = $database->get_table( 'mollie_payments' );
+
+$condition = [
+	'mollie_id' => $payment->id,
+];
+
+$data = [
+
+];
+
+$payment_row = $payments_table->first_row( $condition );
+
+if ( null !== $payment_row ) {
+	$payments_table->update( $values, $payment_row->id );
+}
+
+if ( null === $payment_row ) {
+	$id = $payments_table->insert( $data );
+}
+```
+
 ## Resources
 
 - https://libreworks.github.io/xyster/documentation/guide/xyster.orm.setup.html
