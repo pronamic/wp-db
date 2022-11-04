@@ -1,4 +1,4 @@
-# Object–relational mapping library for WordPress
+# Database library for WordPress
 
 ## Examples
 
