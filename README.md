@@ -5,18 +5,38 @@
 ```php
 <?php
 
-$orm = new EntityManager( $wpdb );
+$database = new Database();
 
-$orm->register_entity(
-	\Pronamic\WordPress\Twinfield\Organisations\Organisation::class,
-	new Entity(
-		$wpdb->prefix . 'twinfield_organisations',
-		'id',
-		[
-			'code' => '%s',
-		]
-	)
+$payments_table = new Table(
+	'mollie_payments',
+	[
+		new Column( 'id', 'BIGINT(16) UNSIGNED NOT NULL AUTO_INCREMENT', '%d' ),
+		new Column( 'created', 'TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP', '%s' ),
+		new Column( 'account_post_id', 'BIGINT(16) UNSIGNED DEFAULT NULL', '%s' ),
+		new Column( 'mollie_id', 'VARCHAR(20) DEFAULT NULL', '%s' ),
+		new Column( 'mode', 'VARCHAR(20) DEFAULT NULL', '%s' ),
+		new Column( 'created_at', 'DATETIME DEFAULT NULL', '%s' ),
+		new Column( 'status', 'VARCHAR(20) DEFAULT NULL', '%s' ),
+		new Column( 'is_cancelable', 'BOOL DEFAULT NULL', '%d' ),
+		new Column( 'paid_at', 'DATETIME DEFAULT NULL', '%s' ),
+		new Column( 'amount', 'NUMERIC(15,2) DEFAULT NULL', '%s' ),
+		new Column( 'description', 'VARCHAR(200) DEFAULT NULL', '%s' ),
+		new Column( 'method', 'VARCHAR(20) DEFAULT NULL', '%s' ),
+		new Column( 'json', 'TEXT DEFAULT NULL', '%s' ),
+	],
+	'
+	PRIMARY KEY  (id),
+	UNIQUE KEY mollie (mollie_id)
+	'
 );
+
+$payments_table->primary_key    = 'id';
+$payments_table->updated_at_key = null;
+$payments_table->created_at_key = null;
+
+$database->register_table( $payments_table );
+
+$database->install();
 ```
 
 ## Resources
