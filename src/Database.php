@@ -136,7 +136,7 @@ class Database {
 	 * @return int|true Boolean true for CREATE, ALTER, TRUNCATE and DROP queries. Number of rows affected/selected for all other queries.
 	 */
 	public function query( $query ) {
-		$result = $this->wpdb->insert( $table, $data, $format );
+		$result = $this->wpdb->query( $query );
 
 		if ( false === $result ) {
 			throw new \Exception( \sprintf( 'Query error: %s.', $this->wpdb->last_error ) );
