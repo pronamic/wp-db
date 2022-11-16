@@ -127,4 +127,21 @@ class Database {
 
 		return $id;
 	}
+
+	/**
+	 * Query.
+	 * 
+	 * @param string $query Query.
+	 * @link https://developer.wordpress.org/reference/classes/wpdb/query/
+	 * @return int|true Boolean true for CREATE, ALTER, TRUNCATE and DROP queries. Number of rows affected/selected for all other queries.
+	 */
+	public function query( $query ) {
+		$result = $this->wpdb->insert( $table, $data, $format );
+
+		if ( false === $result ) {
+			throw new \Exception( \sprintf( 'Query error: %s.', $this->wpdb->last_error ) );
+		}
+
+		return $result;
+	}
 }
