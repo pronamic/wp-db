@@ -68,7 +68,12 @@ class Database {
 		$create_definitions = [];
 
 		foreach ( $table->columns as $column ) {
-			$create_definitions[] = $column->name . ' ' . $column->definition;
+			/**
+			 * Column definition must be in lower case.
+			 * 
+			 * @link https://github.com/pronamic/wp-db/issues/1
+			 */
+			$create_definitions[] = $column->name . ' ' . strtolower( $column->definition );
 		}
 
 		$create_definition = \implode( ',' . PHP_EOL, $create_definitions ) . ', ' . $table->definition;
