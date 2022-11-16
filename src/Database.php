@@ -55,11 +55,11 @@ class Database {
 
 		if ( $this->wpdb->has_cap( 'collation' ) ) {
 			if ( ! empty( $this->wpdb->charset ) ) {
-				$charset_collate .= "DEFAULT CHARACTER SET $wpdb->charset";
+				$charset_collate .= 'DEFAULT CHARACTER SET ' . $this->wpdb->charset;
 			}
 
 			if ( ! empty( $this->wpdb->collate ) ) {
-				$charset_collate .= " COLLATE $wpdb->collate";
+				$charset_collate .= ' COLLATE ' . $this->wpdb->collate;
 			}
 		}
 
