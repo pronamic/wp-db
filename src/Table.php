@@ -13,6 +13,13 @@ namespace Pronamic\WordPress\Database;
 class Table {
 	private $name;
 
+	/**
+	 * Database.
+	 *
+	 * @var Database
+	 */
+	public $database;
+
 	public $columns = [];
 
 	public $definition;
